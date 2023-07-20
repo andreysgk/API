@@ -13,9 +13,10 @@ public class ReqresTest{
     private static final String URL = "https://reqres.in/";
     @Test
     public void getUsers(){
+        Specifications.installSpecification(Specifications.requestSpecification(URL),Specifications.responseSpecificationOK200());
         List<UserData> users = given()
-                .contentType(ContentType.JSON)
-                .when().get(URL+"api/users?page=2")
+//                .contentType(ContentType.JSON)
+                .when().get("api/users?page=2")
                 .then().log().all()
                 .extract().body().jsonPath().getList("data", UserData.class);
         users.forEach(x-> Assertions.assertTrue(x.getAvatar().contains(x.getId().toString())));
