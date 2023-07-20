@@ -74,4 +74,14 @@ public class ReqresTest{
 //        System.out.println(sortYears);
     }
 
+    @Test
+    @DisplayName("DELERE")
+    public void deleteUser(){
+        Specifications.installSpecification(Specifications.requestSpecification(URL),Specifications.responseSpecificationUnique(204));
+        given()
+                .when()
+                .delete("api/users/2")
+                .then().log().all();
+    }
+
 }
